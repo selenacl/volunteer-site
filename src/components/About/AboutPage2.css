@@ -1,0 +1,11 @@
+#aboutPage2Container {
+    background-color: #5d737e;
+    height: 90vh;
+}
+
+#volunteerTextBox {
+    margin-top: 150px;
+    text-align: left;
+    padding-left: 150px;
+    color: #fafafa;
+}

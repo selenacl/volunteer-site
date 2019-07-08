@@ -1,0 +1,17 @@
+#aboutPage1Container {
+    background-color: #fafafa;
+    height: 90vh;
+}
+
+#organizerScreenshot {
+    height: 400px;
+    width: 400px;
+    margin-top: 125px;
+}
+
+#organizerTextBox {
+    margin-top: 150px;
+    text-align: left;
+    padding-left: 50px;
+    color: #3a405a;
+}

@@ -1,0 +1,34 @@
+#landingHomeContainer {
+    background-color: #5d737e;
+    height: 100vh;
+}
+
+#landingHomeLeftBox {
+    color: #fafafa;
+    padding-top: 175px;
+}
+
+#learnMoreBtn {
+    border: solid black 1px;
+    color: #3a405a;
+    background-color: #aec5eb;
+    border: #aec5eb;
+    height: 40px; 
+    border-radius: 0;
+    margin-left: 130px;
+}
+
+#learnMoreBtn:hover {
+    background-color: #7290c2;
+}
+
+h1 {
+    font-size: 55px!important;
+    line-height: 90px!important;
+}
+
+#screenshot {
+    height: 400px;
+    width: 450px;
+    padding-top: 50px;
+}

@@ -1,0 +1,43 @@
+#contactContainer {
+    background-color: #fafafa;
+    height: 90vh;
+    text-align: left;
+    padding-left: 150px;
+    padding-top: 75px;
+    color: #3a405a;
+}
+
+#contactHeader {
+    padding-bottom: 30px;
+}
+
+#contactEmail {
+    border-radius: 0;
+    width: 500px;
+    border: solid #3a405a 1px;
+}
+
+#contactSubject {
+    border-radius: 0;
+    width: 500px;
+    border: solid #3a405a 1px;
+}
+
+#contactMessage {
+    border-radius: 0;
+    width: 800px;
+    border: solid #3a405a 1px;
+}
+
+#contactSubmitBtn {
+    background-color: #e9afa3;
+    border-color: #e9afa3;
+    border-radius: 0;
+    color: #3a405a;
+    font-weight: bold;
+    width: 100px;
+}
+
+#contactSubmitBtn:hover {
+    background-color: #d97f6c;
+}
