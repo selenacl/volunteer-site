@@ -1,6 +1,8 @@
 import React from 'react';
 import './LandingNavbar.css';
-import logo from '../../images/logo.png';
+import logo from '../../../images/logo.png';
+import LoginModal from '../../Common/LoginModal/LoginModal';
+
 
 const navbar = (props) => {
     return (
@@ -17,7 +19,8 @@ const navbar = (props) => {
                     <a href="#" class="landingNavLink"><b>HOME</b></a>
                     <a href="#" class="landingNavLink"><b>ABOUT</b></a>
                     <a href="#" class="landingNavLink"><b>CONTACT</b></a>
-                    <button type="button" class="btn btn-primary" id="landingNavLoginBtn"><b>LOGIN</b></button>
+                    <button type="button" class="btn btn-primary" id="landingNavLoginBtn" 
+                        onClick={props.loggingIn}><b>LOGIN</b></button>
                 </div>
             </div>
         </div>

@@ -1,0 +1,101 @@
+.loginModalCard {
+    height: 400px!important;
+    width: 800px!important;
+    z-index: 9999;
+    transition: all 0.3s ease-out;
+    position: fixed;
+    text-align: center;
+    padding: 3.2em;
+}
+
+#loginModalRight {
+    height: 400px!important;
+    background-color: #fafafa;
+}
+
+#loginModalLeft {
+    height: 400px!important;
+    background-color: #e9afa3;
+    color: white;
+    text-align: left;
+}
+
+#loginModalLeftText {
+    padding-top: 164px;
+    padding-left: 30px;
+    font-size: 36px!important;
+    line-height: 50px!important;
+}
+
+.loginModalHeader {
+    height: 75px;
+    background-color: #f5f5f5;
+    color: #3a405a;
+}
+
+.loginModalLink {
+    font-weight: bold;
+    margin-top: 25px;
+    color: #aec5eb;
+}
+
+.loginModalLink:hover {
+    text-decoration: none;
+    color: #3a405a;
+}
+
+.loginModalLink:active {
+    color: #3a405a;
+}
+
+.loginTextBox {
+    border-radius: 0;
+    width: 250px;
+    height: 40px;
+    border: solid #3a405a 1px;
+}
+
+.signUpTextBox {
+    border-radius: 0;
+    width: 250px;
+    height: 35px;
+    border: solid #3a405a 1px;
+}
+
+#loginSubmitBtn {
+    background-color: #e9afa3;
+    border-color: #e9afa3;
+    border-radius: 0;
+    color: #3a405a;
+    font-weight: bold;
+    width: 100px;
+    margin-top: 20px;
+}
+
+#loginSubmitBtn:hover {
+    background-color: #d97f6c;
+}
+
+#signUpSubmitBtn {
+    background-color: #e9afa3;
+    border-color: #e9afa3;
+    border-radius: 0;
+    color: #3a405a;
+    font-weight: bold;
+    width: 100px;
+    margin-top: 5px;
+}
+
+#signUpSubmitBtn:hover {
+    background-color: #d97f6c;
+}
+
+.loginModalLoginForm {
+    margin: auto;
+    padding-top: 30px;
+}
+
+.loginModalSignUpForm {
+    margin: auto;
+    padding-top: 5px;
+}

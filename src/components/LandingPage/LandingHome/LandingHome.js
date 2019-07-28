@@ -1,11 +1,13 @@
 import React from 'react';
 import './LandingHome.css';
-import screenshot from '../../images/desktop.png';
+import screenshot from '../../../images/desktop.png';
+import LoginModal from '../../Common/LoginModal/LoginModal';
 
-const landingHome = (props) => {
+const landingHome = () => {
     return (
         <div className="container-fluid" id="landingHomeContainer">
             <div className="row">
+                <LoginModal />
                 <div className="col-md-6" id="landingHomeLeftBox">
                     <h1><b>Easily register for<br />and create events</b></h1>
                 </div>

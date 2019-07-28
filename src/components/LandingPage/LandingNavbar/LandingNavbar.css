@@ -27,8 +27,6 @@
     margin-left: 45px;
 }
 
-
-
 .landingNavLink:link {
     color: #3a405a;
 }
@@ -59,11 +57,6 @@
 
 #landingNavLoginBtn:hover {
     background-color: #d97f6c;
-}
-
-.btn.focus, .btn:focus {
-    outline: 0;
-    box-shadow: none!important;
 }
 
 #logoCol {

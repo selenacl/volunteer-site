@@ -1,8 +1,8 @@
 import React from 'react';
 import './AboutPage1.css';
-import screenshot from '../../images/placeholder.png';
+import screenshot from '../../../images/placeholder.png';
 
-const aboutPage1 = (props) => {
+const aboutPage1 = () => {
     return (
         <div className="container-fluid" id="aboutPage1Container">
             <div className="row">
