@@ -19,39 +19,41 @@ class LoginModal extends React.Component {
         this.setState({showLoginForm: false});
     }
 
-    render() {
-        return <div 
-            className="container loginModalCard"
-            style={{
-                transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
-                opacity: this.props.show ? '1' : '0'
-            }}>
-            {this.props.children}
-            <div className="row">
-                <div className="col-md-5" id="loginModalLeft">
-                    <h1 id="loginModalLeftText">Welcome back!</h1>
-                </div>
-                <div className="col-md-7" id="loginModalRight">
-                    <div className="row loginModalHeader">
-                        <div className="col-md-6 loginModalLink">
-                            <a href="#" className="loginModalLink" onClick={this.toggleLoginFormHandler}>LOGIN</a>
-                        </div>
-                        <div className="col-md-6 loginModalLink">
-                            <a href="#" className="loginModalLink" onClick={this.toggleSignUpFormHandler}>SIGN UP</a>
-                        </div>
+    render () {
+        return (
+            <div 
+                className="container loginModalCard"
+                style={{
+                    transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
+                    opacity: this.props.show ? '1' : '0'
+                }}>
+                {this.props.children}
+                <div className="row">
+                    <div className="col-md-5" id="loginModalLeft">
+                        <h1 id="loginModalLeftText">Welcome back!</h1>
                     </div>
-                    { this.state.showLoginForm ?
-                    <div>
-                        <LoginForm />
-                    </div> : 
-                    <div>
-                        <SignUpForm />
+                    <div className="col-md-7" id="loginModalRight">
+                        <div className="row loginModalHeader">
+                            <div className="col-md-6 loginModalLink">
+                                <a href="#" className="loginModalLink" onClick={this.toggleLoginFormHandler}>LOGIN</a>
+                            </div>
+                            <div className="col-md-6 loginModalLink">
+                                <a href="#" className="loginModalLink" onClick={this.toggleSignUpFormHandler}>SIGN UP</a>
+                            </div>
+                        </div>
+                        { this.state.showLoginForm ?
+                        <div>
+                            <LoginForm />
+                        </div> : 
+                        <div>
+                            <SignUpForm />
+                        </div>
+                        }
+                        
                     </div>
-                    }
-                    
                 </div>
             </div>
-        </div>
+        )
     }
 }
 

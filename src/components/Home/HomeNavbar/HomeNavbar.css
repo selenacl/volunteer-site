@@ -45,10 +45,6 @@
     color: #aec5eb!important;
 }
 
-.activeNavLink {
-    color: #aec5eb!important;
-}
-
 #landingNavLoginBtn {
     margin-left: 45px;
     color: #3a405a;
@@ -65,7 +61,6 @@
 
 #logoCol {
     padding: 0px!important;
-    padding-right: 10px!important;
     margin: 0px!important;
 }
 
