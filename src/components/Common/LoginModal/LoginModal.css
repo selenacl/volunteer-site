@@ -11,6 +11,7 @@
 #loginModalRight {
     height: 400px!important;
     background-color: #fafafa;
+    padding: 0px;
 }
 
 #loginModalLeft {

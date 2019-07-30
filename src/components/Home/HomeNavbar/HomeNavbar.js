@@ -2,7 +2,6 @@ import React from 'react';
 import Link, {NavLink} from 'react-router-dom';
 import '../../LandingPage/LandingNavbar/LandingNavbar.css';
 import logo from '../../../images/logo.png';
-import LoginModal from '../../Common/LoginModal/LoginModal';
 import '../../Home/HomeNavbar/HomeNavbar.css'
 const homeNavbar = (props) => {
     return (
