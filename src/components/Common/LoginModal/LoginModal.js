@@ -8,7 +8,8 @@ import SignUpForm from './SignUpForm';
 class LoginModal extends React.Component {
     state = {
         showLoginForm: true,
-        showSignUpForm: false
+        showSignUpForm: false,
+        active: true
     }
 
     toggleLoginFormHandler = () => {
@@ -19,6 +20,10 @@ class LoginModal extends React.Component {
     toggleSignUpFormHandler = () => {
         this.setState({showSignUpForm: true});
         this.setState({showLoginForm: false});
+    }
+
+    toggleClassHandler = () => {
+        this.setState({active: !this.state.active});
     }
 
     render () {
@@ -40,10 +45,10 @@ class LoginModal extends React.Component {
                         </div>
                         <div className="row loginModalHeader">
                             <div className="col-md-6 loginModalLink">
-                                <a href="#" className="loginModalLink" onClick={this.toggleLoginFormHandler}>LOGIN</a>
+                                <a href="#" className={this.state.showLoginForm ? "activeLoginLink" : "loginModalLink"} onClick={this.toggleLoginFormHandler}>LOGIN</a>
                             </div>
                             <div className="col-md-6 loginModalLink">
-                                <a href="#" className="loginModalLink" onClick={this.toggleSignUpFormHandler}>SIGN UP</a>
+                                <a href="#" className={this.state.showSignUpForm ? "activeLoginLink" : "loginModalLink"} onClick={this.toggleSignUpFormHandler}>SIGN UP</a>
                             </div>
                         </div>
                         { this.state.showLoginForm ?

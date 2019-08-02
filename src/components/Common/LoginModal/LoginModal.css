@@ -107,3 +107,11 @@
     margin-top: 0px!important;
     margin-right: 0px!important;
 }
+
+.activeLoginLink {
+    color: #3a405a!important;
+}
+
+.activeLoginLink:hover {
+    text-decoration: none;
+}
