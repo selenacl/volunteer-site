@@ -1,5 +1,6 @@
 import React from 'react';
 import './RegisteredEvents.css';
+import '../HomeLayout/HomeLayout.css';
 import HomeNavbar from '../HomeNavbar/HomeNavbar';
 import LoginModal from '../../Common/LoginModal/LoginModal'
 
@@ -19,7 +20,14 @@ class RegisteredEvents extends React.Component {
                 loggingIn={this.loginHandler}/>
             <LoginModal 
                 show={this.state.loggingIn}/>
-            <h1>Registered Events Container</h1>
+            <div className="container-fluid, homeContainer">
+                <div className="row">
+                    <h2><b>Registered Events</b></h2>
+                </div>
+                <div className="row">
+                    
+                </div>
+            </div>
         </div>
         )
     }

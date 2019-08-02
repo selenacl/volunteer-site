@@ -1,5 +1,6 @@
 import React from 'react';
 import './Profile.css';
+import '../HomeLayout/HomeLayout.css';
 import HomeNavbar from '../HomeNavbar/HomeNavbar';
 import LoginModal from '../../Common/LoginModal/LoginModal'
 
@@ -19,7 +20,15 @@ class Profile extends React.Component {
                 loggingIn={this.loginHandler}/>
             <LoginModal 
                 show={this.state.loggingIn}/>
-            <h1>Profile Container</h1>
+            <div className="container-fluid, homeContainer">
+                <div className="row">
+                    <h2><b>Profile</b></h2>
+                </div>
+                <div className="row">
+                    
+                </div>
+            </div>
+            
         </div>
         )
     }

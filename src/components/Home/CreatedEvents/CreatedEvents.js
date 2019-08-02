@@ -1,5 +1,6 @@
 import React from 'react';
 import './CreatedEvents.css';
+import '../HomeLayout/HomeLayout.css';
 import HomeNavbar from '../HomeNavbar/HomeNavbar';
 import LoginModal from '../../Common/LoginModal/LoginModal'
 
@@ -19,7 +20,14 @@ class CreatedEvents extends React.Component {
                 loggingIn={this.loginHandler}/>
             <LoginModal 
                 show={this.state.loggingIn}/>
-            <h1>Created Events Container</h1>
+            <div className="container-fluid, homeContainer">
+                <div className="row">
+                    <h2><b>Created Events</b></h2>
+                </div>
+                <div className="row">
+                    
+                </div>
+            </div>
         </div>
         )
     }
