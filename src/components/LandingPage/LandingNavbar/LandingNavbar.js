@@ -18,9 +18,9 @@ const navbar = (props) => {
                 </div>
                 <div className="col-md-6" id="landingNavlinks">
                     <NavLink to="/home/registeredEvents" activeClassName="activeNavLink" className="landingNavLink"><b>AUTH HOME</b></NavLink>
-                    <a href="#" class="landingNavLink"><b>HOME</b></a>
-                    <a href="#" class="landingNavLink"><b>ABOUT</b></a>
-                    <a href="#" class="landingNavLink"><b>CONTACT</b></a>
+                    <a href="#landingHomeContainer" class="landingNavLink"><b>HOME</b></a>
+                    <a href="#aboutPage1Container" class="landingNavLink"><b>ABOUT</b></a>
+                    <a href="#contactContainer" class="landingNavLink"><b>CONTACT</b></a>
                     <button type="button" class="btn btn-primary" id="landingNavLoginBtn" 
                         onClick={props.loggingIn}><b>LOGIN</b></button>
                 </div>

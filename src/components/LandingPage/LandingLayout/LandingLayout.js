@@ -12,7 +12,7 @@ class LandingLayout extends Component {
     }
 
     loginHandler = () => {
-        this.setState({loggingIn: true});
+        this.setState({loggingIn: !this.state.loggingIn});
     }
 
     render() {
@@ -21,6 +21,7 @@ class LandingLayout extends Component {
                 <LandingNavbar 
                     loggingIn={this.loginHandler}/>
                 <LoginModal 
+                    loggingIn={this.loginHandler}
                     show={this.state.loggingIn}/>
                 <LandingHome />
                 <AboutPage1 />

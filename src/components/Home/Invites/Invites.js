@@ -10,7 +10,7 @@ class Invites extends React.Component {
     }
 
     loginHandler = () => {
-        this.setState({loggingIn: true});
+        this.setState({loggingIn: !this.state.loggingIn});
     }
 
     render() {
@@ -19,6 +19,7 @@ class Invites extends React.Component {
             <HomeNavbar 
                 loggingIn={this.loginHandler}/>
             <LoginModal 
+                loggingIn={this.loginHandler}
                 show={this.state.loggingIn}/>
             <div className="container-fluid, homeContainer">
                 <div className="row">
