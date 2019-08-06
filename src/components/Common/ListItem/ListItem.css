@@ -1,0 +1,23 @@
+.listItem {
+    background-color: #e9afa3;
+    height: 75px;
+    line-height: 75px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.listItemText {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    color: white;
+    font-weight: bold;
+    padding-left: 20px;
+}
+
+#editEventBtn {
+    float: right;
+    padding-top: 25px;
+    padding-right: 20px;
+    color: white;
+}
