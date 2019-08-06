@@ -10,11 +10,7 @@ class HomeLayout extends Component {
     render() {
         return (
             <div className="homeLayout">
-                <HomeNavbar />
-                <RegisteredEvents />
-                <CreatedEvents />
-                <Invites />
-                <Profile />
+               
             </div>
         );
     }

@@ -1,8 +1,11 @@
 import React from 'react';
 import './RegisteredEvents.css';
 import '../HomeLayout/HomeLayout.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import HomeNavbar from '../HomeNavbar/HomeNavbar';
 import LoginModal from '../../Common/LoginModal/LoginModal'
+import ListItem from '../../Common/ListItem/ListItem';
 
 class RegisteredEvents extends React.Component {
     state = {
@@ -22,11 +25,13 @@ class RegisteredEvents extends React.Component {
                 loggingIn={this.loginHandler}
                 show={this.state.loggingIn}/>
             <div className="container-fluid, homeContainer">
-                <div className="row">
-                    <h2><b>Registered Events</b></h2>
+                <div className="row, homeTitle">
+                    <h3><b>REGISTERED EVENTS<button type="button" class="btn" id="addEventBtn"><FontAwesomeIcon icon={faPlus} /></button></b></h3>        
                 </div>
                 <div className="row">
-                    
+                    <ListItem />
+                    <ListItem />
+                    <ListItem />
                 </div>
             </div>
         </div>

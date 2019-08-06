@@ -13,8 +13,8 @@ const navbar = (props) => {
                     </div>
                 </NavLink>
                 <div className="col-md-5" id="landingNavTitle">
-                    <h4><b>Ready</b></h4>
-                    <h4><b>Registers</b></h4>
+                    <h4><b>Simple</b></h4>
+                    <h4><b>Signups</b></h4>
                 </div>
                 <div className="col-md-6" id="landingNavlinks">
                     <NavLink to="/home/registeredEvents" activeClassName="activeNavLink" className="landingNavLink"><b>AUTH HOME</b></NavLink>

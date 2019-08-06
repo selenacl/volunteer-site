@@ -23,7 +23,7 @@ class Profile extends React.Component {
                 show={this.state.loggingIn}/>
             <div className="container-fluid, homeContainer">
                 <div className="row">
-                    <h2><b>Profile</b></h2>
+                    <h3><b>PROFILE</b></h3>
                 </div>
                 <div className="row">
                     
