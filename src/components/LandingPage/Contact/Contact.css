@@ -29,15 +29,16 @@
     border: solid #3a405a 1px;
 }
 
-#contactSubmitBtn {
+.submitBtn {
     background-color: #e9afa3;
     border-color: #e9afa3;
     border-radius: 0;
     color: #3a405a;
     font-weight: bold;
     width: 100px;
+    padding: 5px;
 }
 
-#contactSubmitBtn:hover {
+.submitBtn:hover {
     background-color: #d97f6c;
 }

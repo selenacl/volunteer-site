@@ -16,6 +16,10 @@ class Navbar extends Component {
         this.setState({showingLogin: !this.state.showingLogin});
     }
 
+    logoutHandler = () => {
+
+    }
+
     render () {
         return (
             <div className="container-fluid" id="navContainer">
@@ -24,7 +28,7 @@ class Navbar extends Component {
                     showingLogin={this.loginHandler}
                     show={this.state.showingLogin}/>
 
-                    <NavLink to="/" onClick={console.log(this.props)}>
+                    <NavLink to="/">
                         <div className="col-md-1" id="logoCol">
                             <img src={logo} alt="logo" id="navLogo" style={{display: "inline"}}></img>
                         </div>
@@ -48,8 +52,10 @@ class Navbar extends Component {
                             <NavLink to="/home/createdEvents" activeClassName="activeNavLink" className="navLink"><b>CREATED EVENTS</b></NavLink>
                             <NavLink to="/home/invites" activeClassName="activeNavLink" className="navLink"><b>INVITES</b></NavLink>
                             <NavLink to="/home/profile" activeClassName="activeNavLink" className="navLink"><b>PROFILE</b></NavLink>
-                            <button type="button" activeClassName="activeNavLink" class="btn btn-primary" id="navLoginBtn" 
-                                onClick={() => this.loginHandler()}><b>LOGIN</b></button>
+                            <NavLink to="/">
+                                <button type="button" activeClassName="activeNavLink" class="btn btn-primary" id="navLoginBtn" 
+                                onClick={() => this.logoutHandler()}><b>LOGOUT</b></button>
+                            </NavLink>
                         </div>
                     }
     

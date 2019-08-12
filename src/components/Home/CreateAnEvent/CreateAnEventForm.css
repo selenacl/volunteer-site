@@ -1,0 +1,77 @@
+.createEventContainer {
+    background-color: #fafafa;
+    text-align: left;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 50px;
+    padding-bottom: 16px;
+}
+
+#generateTimesContainer {
+    border: 1px solid black;
+    height: auto;
+    flex: 1;
+    margin-right: 5px;
+    background-color: white;
+}
+
+#manualTimesContainer {
+    border: 1px solid black;
+    height: auto;
+    margin-left: 5px;
+    flex: 1;
+    background-color: white;
+}
+
+#innerGenerateTimes {
+    display: flex;
+}
+
+#createEventForm {
+    display: flex;
+}
+
+#eventForm {
+    flex: 1;
+}
+
+.timeLabel {
+    width: 150px;
+}
+.timeInput {
+    width: 150px;
+    margin-right: 10px;
+}
+
+.timeRow {
+    display: flex;
+    padding: 10px;
+}
+
+input {
+    border: 1px solid black;
+}
+
+select {
+    border: 0;
+    outline: 1px inset black; 
+    outline-offset:-1px;
+    background-color: white;
+}
+
+.timeTitle {
+    padding: 10px;
+    color: gray;
+}
+
+#timeSlotsContainer {
+    height: 300px;
+    border: 1px solid black;
+    margin-bottom: 16px!important;
+}
+
+#eventDescription {
+    flex: 1;
+    border-radius: 0;
+    border: solid #3a405a 1px;
+}
