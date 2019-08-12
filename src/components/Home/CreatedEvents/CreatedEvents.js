@@ -3,28 +3,22 @@ import './CreatedEvents.css';
 import '../HomeLayout/HomeLayout.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import LoginModal from '../../Common/LoginModal/LoginModal'
 import ListItem from '../../Common/ListItem/ListItem';
+import Link, {NavLink} from 'react-router-dom';
 
 class CreatedEvents extends React.Component {
-    state = {
-        loggingIn: false
-    }
-
-    loginHandler = () => {
-        this.setState({loggingIn: !this.state.loggingIn});
-    }
 
     render() {
         return (
         <div className="container-fluid">
-            <LoginModal 
-                loggingIn={this.loginHandler}
-                show={this.state.loggingIn}/>
             <div className="container-fluid, homeContainer">
-                <div className="row, homeTitle">
-                    <h3><b>CREATED EVENTS<button type="button" class="btn" id="addEventBtn"><FontAwesomeIcon icon={faPlus} /></button></b></h3>        
-                </div>
+                    <div className="row, homeTitle">
+                        <h3><b>CREATED EVENTS
+                        <NavLink to="/home/createEvent">
+                            <button type="button" class="btn" id="addEventBtn"><FontAwesomeIcon icon={faPlus} /></button>
+                            </NavLink>
+                            </b></h3>        
+                    </div>
                 <div className="row">
                     <ListItem />
                     <ListItem />
