@@ -3,7 +3,6 @@ import './Invites.css';
 import '../HomeLayout/HomeLayout.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import HomeNavbar from '../HomeNavbar/HomeNavbar';
 import LoginModal from '../../Common/LoginModal/LoginModal'
 import ListItem from '../../Common/ListItem/ListItem';
 
@@ -19,8 +18,6 @@ class Invites extends React.Component {
     render() {
         return (
         <div className="container-fluid">
-            <HomeNavbar 
-                loggingIn={this.loginHandler}/>
             <LoginModal 
                 loggingIn={this.loginHandler}
                 show={this.state.loggingIn}/>
