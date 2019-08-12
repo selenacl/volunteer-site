@@ -5,13 +5,16 @@
     transition: all 0.3s ease-out;
     position: fixed;
     text-align: center;
-    padding: 3.2em;
+    margin: 3.2em;
 }
 
 #loginModalRight {
     height: 400px!important;
     background-color: #fafafa;
     padding: 0px;
+    border-top: 1px solid #aec5eb;
+    border-right: 1px solid #aec5eb;
+    border-bottom: 1px solid #aec5eb;
 }
 
 #loginModalLeft {
@@ -19,6 +22,9 @@
     background-color: #e9afa3;
     color: white;
     text-align: left;
+    border-top: 1px solid #aec5eb;
+    border-left: 1px solid #aec5eb;
+    border-bottom: 1px solid #aec5eb;
 }
 
 #loginModalLeftText {

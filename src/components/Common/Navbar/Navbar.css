@@ -1,21 +1,21 @@
-#landingNavLogo {
+#navLogo {
     width: 75px!important;
     height: 75px!important;
 }
 
-#landingNavTitle {
+#navTitle {
     text-align: left;
     padding: 0px;
     margin-top: 2px;
     color: #3a405a;
 }
 
-#landingNavlinks {
+#navlinks {
     text-align: right;
     padding-top: 25px;
 }
 
-#landingNavContainer {
+#navContainer {
     background-color: #fafafa;
     position: -webkit-sticky;
     position: sticky;
@@ -23,29 +23,33 @@
     z-index: 1;
 }
 
-.landingNavLink {
+.navLink {
     margin-left: 45px;
 }
 
-.landingNavLink:link {
+.navLink:link {
     color: #3a405a;
 }
 
-.landingNavLink:visited {
+.navLink:visited {
     color: #3a405a;
     text-decoration: none;
 }
 
-.landingNavLink:hover {
+.navLink:hover {
     color: #aec5eb!important;
     text-decoration: none!important;
 }
 
-.landingNavLink:active {
+.navLink:active {
     color: #aec5eb!important;
 }
 
-#landingNavLoginBtn {
+.activeNavLink {
+    color: #aec5eb!important;
+}
+
+#navLoginBtn {
     margin-left: 45px;
     color: #3a405a;
     background-color: #e9afa3;
@@ -55,12 +59,13 @@
     padding-top: 2px;
 }
 
-#landingNavLoginBtn:hover {
+#navLoginBtn:hover {
     background-color: #d97f6c;
 }
 
 #logoCol {
     padding: 0px!important;
+    padding-right: 10px!important;
     margin: 0px!important;
 }
 

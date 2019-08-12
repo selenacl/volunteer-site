@@ -41,7 +41,7 @@ class LoginModal extends React.Component {
                     </div>
                     <div className="col-md-7" id="loginModalRight">
                         <div className="row" id="loginExit">
-                            <button type="button" activeClassName="activeNavLink" class="btn" id="loginExitButton" onClick={this.props.loggingIn}><FontAwesomeIcon icon={faTimes} /></button>
+                            <button type="button" activeClassName="activeNavLink" class="btn" id="loginExitButton" onClick={this.props.showingLogin}><FontAwesomeIcon icon={faTimes} /></button>
                         </div>
                         <div className="row loginModalHeader">
                             <div className="col-md-6 loginModalLink">
