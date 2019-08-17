@@ -32,14 +32,6 @@ const UserSchema = new Schema({
     active: {
         type: Boolean,
         default: true
-    }, 
-    createdEvents: {
-        type: Array,
-        default: []
-    },
-    registeredEvents: {
-        type: Array, 
-        default: []
     }
 
 });

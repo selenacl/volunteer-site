@@ -52,9 +52,12 @@ const EventSchema = new Schema({
                 type: Number,
                 required: true
             }, 
-            registeredUsers: {
+            usersRegistered: {
                 type: Array,
                 default: []
+            }, 
+            option: {
+                type: Number
             }
         }
     ]

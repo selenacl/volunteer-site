@@ -47,7 +47,7 @@ router.post('/register', (req, res) => {
 });
 
 // @route   GET api/users/login
-// @desc    Login user /  Returning JWT Token
+// @desc    Login user /  Return JWT Token
 // @access  Public
 router.post('/login', (req, res) => {
 
@@ -96,10 +96,50 @@ router.get('/current', passport.authenticate('jwt', {session: false}), (req, res
         id: req.user.id,
         firstName: req.user.email,
         lastName: req.user.email,
-        email: req.user.email,
-        registeredEvents: req.user.registeredEvents,
-        createdEvents: req.user.createdEvents
+        email: req.user.email
     });
+});
+
+// @route   PATCH api/users/:id
+// @desc    Edit user details
+// @access  Private
+router.patch('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+
+    // if user is the creator they can edit their own
+    User.findById(req.params.id)
+        .then(user => {
+            const allowedUpdates = ['email', 'firstName', 'lastName', 'password'];
+            const updates = Object.keys(req.body);
+            const isValidOperation = updates.every(update => allowedUpdates.includes(update));
+            
+            if(!isValidOperation) {
+                return res.status(400).json({invalidupdates: 'Updates are invalid'});
+            }
+            
+            updates.forEach(update => user[update] = req.body[update]);
+            
+            user.save()
+                .then(event => res.json(user))
+                .catch(err => console.log(err));
+    })
+    .catch(err => res.status(404).json({ usernotfound: 'No user found'}));
+});
+
+// @route   DELETE api/users/:id
+// @desc    Delete (deactivate) user
+// @access  Private
+router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+
+    // if user is the creator they can edit their own
+    User.findById(req.params.id)
+        .then(user => {
+            user.active = false;
+            
+            user.save()
+                .then(event => res.json(user))
+                .catch(err => console.log(err));
+    })
+    .catch(err => res.status(404).json({ usernotfound: 'No user found'}));
 });
 
 module.exports = router;
