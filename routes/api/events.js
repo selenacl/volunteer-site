@@ -7,6 +7,7 @@ const Event = require('../../models/Event');
 const User = require('../../models/User');
 
 const validateEventInput = require('../../validation/event');
+const validateEditEventDetailsInput = require('../../validation/edit-event-details');
 
 // @route   POST api/events
 // @desc    Create event
@@ -35,13 +36,45 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 router.get('/', (req, res) => {
     Event.find()
         .sort({date: -1})
-        .then(events => res.json(events))
-        .catch(err => res.status(404).json({noeventfound: 'No events found with that id'}));
+        .then(events => {
+            const eventDetails = [];
+            events.forEach(event => {
+                eventDetails.push({
+                    id: event.id,
+                    name: event.name,
+                    description: event.description,
+                    timesAvailable: event.timesAvailable,
+                    creator: event.creator,
+                    active: event.active
+                })
+            })
+            res.json(eventDetails);
+        })
+        .catch(err => res.status(404).json({noeventsfound: 'There are no events'}));
+});
+
+// @route   GET api/events/public/:id
+// @desc    Get event by id
+// @access  Public
+router.get('/public/:id', (req, res) => {
+    Event.findById(req.params.id)
+        .then(event => {
+            const eventDetails = {
+                id: event.id,
+                name: event.name,
+                description: event.description,
+                timesAvailable: event.timesAvailable,
+                creator: event.creator,
+                active: event.active
+            }
+            res.json(eventDetails)
+        })
+        .catch(err => res.status(404).json({noeventfound: 'No event found with that id'}));
 });
 
 // @route   GET api/events/:id
-// @desc    Get event by id
-// @access  Public
+// @desc    Get all event details by id
+// @access  Private
 router.get('/:id', (req, res) => {
     Event.findById(req.params.id)
         .then(event => res.json(event))
@@ -81,9 +114,9 @@ router.post('/invites/:id', passport.authenticate('jwt', { session: false }), (r
                     
                     // Check for duplicate invitees
                     const newInvites = new Array();
-                    req.body.usersInvited.forEach(userId => {
-                        if(!event.usersInvited.includes(userId)) {
-                            newInvites.push(userId);
+                    req.body.usersInvited.forEach(email => {
+                        if(!event.usersInvited.includes(email)) {
+                            newInvites.push(email);
                         }
                     });
                     event.usersInvited.push.apply(event.usersInvited, newInvites);
@@ -106,21 +139,25 @@ router.post('/registrations/:id', passport.authenticate('jwt', { session: false 
         .then(user => {
             Event.findById(req.params.id)
                 .then(event => {
-                    if(!event.usersInvited.includes(req.user.id.toString())) {
-                        return res.status(401).json({notauthorized: 'User not authorized'});
+                    if(!event.usersInvited.includes(req.user.email)) {
+                        res.status(401).json({notauthorized: 'User not authorized'});
                     } 
 
                     // Check if user already registered
                     let alreadyRegistered = false;
                     event.timesAvailable.forEach(time => {
-                        if(time.usersRegistered.includes(req.user.id)) {
+                        if(time.usersRegistered.includes(req.user.email)) {
                             alreadyRegistered = true;
-                            return res.status(400).json({ alreadyregistered: 'User already registered for event'})
+                            res.status(400).json({ alreadyregistered: 'User already registered for event'})
                         }
                     })
 
+                    if(req.body.option === undefined) {
+                        res.status(400).json({timerequired: 'A time must be selected'});
+                    }
+
                     if(!alreadyRegistered)
-                        event.timesAvailable[req.body.option].usersRegistered.push(req.user.id);
+                        event.timesAvailable[req.body.option].usersRegistered.push(req.user.email);
                     
                     event.save()
                         .then(event => res.json(event))
@@ -139,13 +176,17 @@ router.patch('/registrations/:id', passport.authenticate('jwt', { session: false
         .then(user => {
             Event.findById(req.params.id)
                 .then(event => {
+                    if(req.body.option === undefined) {
+                        res.status(400).json({timerequired: 'A time must be selected'});
+                    }
+
                     // Check if user already registered
                     let registered = false;
                     event.timesAvailable.forEach(time => {
-                        if(time.usersRegistered.includes(req.user.id)) {
+                        if(time.usersRegistered.includes(req.user.email)) {
                             registered = true;
                             // remove registration
-                            time.usersRegistered = time.usersRegistered.filter(x => x !== req.user.id);
+                            time.usersRegistered = time.usersRegistered.filter(x => x !== req.user.email);
                         }
                     })
 
@@ -153,7 +194,7 @@ router.patch('/registrations/:id', passport.authenticate('jwt', { session: false
                         return res.status(401).json({ notregistered: 'User not registered for event'})
                         
                     // add registration
-                    event.timesAvailable[req.body.option].usersRegistered.push(req.user.id);
+                    event.timesAvailable[req.body.option].usersRegistered.push(req.user.email);
                     
                     event.save()
                         .then(event => res.json(event))
@@ -167,6 +208,11 @@ router.patch('/registrations/:id', passport.authenticate('jwt', { session: false
 // @desc    Delete event registration
 // @access  Private
 router.delete('/registrations/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const { errors, isValid } = validateEditEventDetailsInput(req.body);
+
+    if(!isValid) {
+        return res.status(400).json(errors);
+    }
     // if user is registered they can delete their registration
     User.findOne({ user: req.user.id })
     .then(user => {
@@ -197,6 +243,14 @@ router.delete('/registrations/:id', passport.authenticate('jwt', { session: fals
 // @desc    Edit event details
 // @access  Private
 router.patch('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const allowedUpdates = ['name', 'description', 'timesAvailable'];
+    const updates = Object.keys(req.body);
+    const isValidUpdate = updates.every(update => allowedUpdates.includes(update));
+    
+    if(!isValidUpdate) {
+        return res.status(400).json({invalidupdates: 'Updates are invalid'});
+    }
+
     // if user is the creator they can edit their event details
     User.findOne({ user: req.user.id })
     .then(user => {
@@ -206,14 +260,19 @@ router.patch('/:id', passport.authenticate('jwt', { session: false }), (req, res
                     return res.status(401).json({notauthorized: 'User not authorized'});
                 } 
 
-                const allowedUpdates = ['name', 'description', 'timesAvailable'];
-                const updates = Object.keys(req.body);
-                const isValidOperation = updates.every(update => allowedUpdates.includes(update));
-                
-                if(!isValidOperation) {
-                    return res.status(400).json({invalidupdates: 'Updates are invalid'});
+                // If an allowedUpdate is not updated leave as is
+                allowedUpdates.forEach(update => {
+                    if(req.body[update] === undefined) {
+                        req.body[update] = event[update];
+                    }
+                })
+
+                const { errors, isValid } = validateEditEventDetailsInput(req.body);
+
+                if(!isValid) {
+                    return res.status(400).json(errors);
                 }
-                
+
                 updates.forEach(update => event[update] = req.body[update]);
                 
                 event.save()
@@ -224,5 +283,48 @@ router.patch('/:id', passport.authenticate('jwt', { session: false }), (req, res
             .catch(err => res.status(404).json({ eventnotfound: 'No event found'}));
     })
 });
+
+// @route   GET api/events/created/:id
+// @desc    Get created events by user id
+// @access  Private
+router.get('/created/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    User.findOne({ user: req.user.id })
+    .then(user => {
+        Event.find({creator: req.params.id})
+            .then(events => {
+                res.json(events);
+            })
+            .catch(err => res.status(404).json({ eventnotfound: 'No event found'}));
+    })
+});
+
+// @route   GET api/events/registrations/:id
+// @desc    Get registered events by user id
+// @access  Private
+router.get('/registrations/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    User.findOne({ user: req.user.id })
+    .then(user => {
+        Event.find({'timesAvailable.usersRegistered': req.user.email})
+            .then(events => {
+                res.json(events);
+            })
+            .catch(err => res.status(404).json({ eventnotfound: 'No event found'}));
+    })
+});
+
+// @route   GET api/invites/created/:id
+// @desc    Get invites by user id
+// @access  Private
+router.get('/invites/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    User.findOne({ user: req.user.id })
+    .then(user => {
+        Event.find({usersInvited: req.user.email})
+            .then(events => {
+                res.json(events);
+            })
+            .catch(err => res.status(404).json({ eventnotfound: 'No event found'}));
+    })
+});
+
 
 module.exports = router;

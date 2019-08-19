@@ -7,10 +7,11 @@ const passport = require('passport');
 
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
+const validateEditUserInput = require('../../validation/edit-user-details');
 
 const User = require('../../models/User');
 
-// @route   GET api/users/register
+// @route   POST api/users/register
 // @desc    Register user
 // @access  Public
 router.post('/register', (req, res) => {
@@ -50,18 +51,18 @@ router.post('/register', (req, res) => {
 // @desc    Login user /  Return JWT Token
 // @access  Public
 router.post('/login', (req, res) => {
-
     const { errors, isValid } = validateLoginInput(req.body);
 
     if(!isValid) {
         return res.status(400).json(errors);
     }
+
     const email = req.body.email;
     const password = req.body.password;
 
     User.findOne({email})
         .then(user => {
-            if(!user) {
+            if((!user) || (user.active != 1)) {
                 errors.email = 'User not found';
                 return res.status(404).json(errors);
             }
@@ -77,6 +78,7 @@ router.post('/login', (req, res) => {
                             (err, token) => {
                                 res.json({
                                     success: true,
+                                    user: user.id,
                                     token: 'Bearer ' + token
                                 })
                             });
@@ -94,8 +96,8 @@ router.post('/login', (req, res) => {
 router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
     res.json({
         id: req.user.id,
-        firstName: req.user.email,
-        lastName: req.user.email,
+        firstName: req.user.firstName,
+        lastName: req.user.lastName,
         email: req.user.email
     });
 });
@@ -104,16 +106,27 @@ router.get('/current', passport.authenticate('jwt', {session: false}), (req, res
 // @desc    Edit user details
 // @access  Private
 router.patch('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const allowedUpdates = ['email', 'firstName', 'lastName'];
+    const updates = Object.keys(req.body);
+    const isValidUpdate = updates.every(update => allowedUpdates.includes(update));
+    
+    if(!isValidUpdate) {
+        return res.status(400).json({invalidupdates: 'Updates are invalid'});
+    }
 
-    // if user is the creator they can edit their own
     User.findById(req.params.id)
         .then(user => {
-            const allowedUpdates = ['email', 'firstName', 'lastName', 'password'];
-            const updates = Object.keys(req.body);
-            const isValidOperation = updates.every(update => allowedUpdates.includes(update));
-            
-            if(!isValidOperation) {
-                return res.status(400).json({invalidupdates: 'Updates are invalid'});
+            // If an allowedUpdate is not updated leave as is
+            allowedUpdates.forEach(update => {
+                if(req.body[update] === undefined) {
+                    req.body[update] = user[update];
+                }
+            })
+
+            const { errors, isValid } = validateEditUserInput(req.body);
+        
+            if(!isValid) {
+                return res.status(400).json(errors);
             }
             
             updates.forEach(update => user[update] = req.body[update]);
@@ -129,8 +142,6 @@ router.patch('/:id', passport.authenticate('jwt', { session: false }), (req, res
 // @desc    Delete (deactivate) user
 // @access  Private
 router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
-
-    // if user is the creator they can edit their own
     User.findById(req.params.id)
         .then(user => {
             user.active = false;
