@@ -1,8 +1,6 @@
 import React from 'react';
 import './CreateAnEventForm.css';
 import '../HomeLayout/HomeLayout.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 class CreateAnEventForm extends React.Component {
 

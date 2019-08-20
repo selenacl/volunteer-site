@@ -1,18 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
+import setAuthToken from './utils/setAuthToken';
+import { setCurrentUser, logoutUser } from './actions/authActions';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import store from './store';
 
 import './index.css';
 import App from './App';
 
 import * as serviceWorker from './serviceWorker';
-import reducer from './store/reducer';
 import 'bootstrap/dist/css/bootstrap.css';
 import './bootstrap-custom.css';
 
-const store = createStore(reducer);
+if(localStorage.jwtToken) {
+    setAuthToken(localStorage.jwtToken);
+    const decoded = jwt_decode(localStorage.jwtToken);
+    store.dispatch(setCurrentUser(decoded));
+    const currentTime = Date.now() / 1000;
+    if(decoded.exp < currentTime) {
+        store.dispatch(logoutUser());
+        window.location.href = '/';
+    }
+}
 
 const app = (
     <Provider store={store}> 
