@@ -4,7 +4,7 @@ import '../HomeLayout/HomeLayout.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import ListItem from '../../Common/ListItem/ListItem';
-import Link, {NavLink} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 class CreatedEvents extends React.Component {
 
