@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../../actions/authActions';
+import { clearRegisteredEvents } from '../../../actions/eventActions';
 import LoginModal from '../LoginModal/LoginModal';
 
 class Navbar extends Component {
@@ -19,6 +20,7 @@ class Navbar extends Component {
 
     logoutHandler = (e) => {
         e.preventDefault();
+        this.props.clearRegisteredEvents();
         this.props.logoutUser(this.props.history);
     }
 
@@ -86,4 +88,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, {logoutUser})(withRouter(Navbar));
+export default connect(mapStateToProps, {logoutUser, clearRegisteredEvents})(withRouter(Navbar));

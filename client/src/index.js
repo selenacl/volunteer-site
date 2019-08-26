@@ -13,6 +13,9 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import './bootstrap-custom.css';
+import { clearRegisteredEvents } from './actions/eventActions';
+import { clearCreatedEvents } from './actions/eventActions';
+import { clearInvites } from './actions/eventActions';
 
 if(localStorage.jwtToken) {
     setAuthToken(localStorage.jwtToken);
@@ -21,6 +24,9 @@ if(localStorage.jwtToken) {
     const currentTime = Date.now() / 1000;
     if(decoded.exp < currentTime) {
         store.dispatch(logoutUser());
+        store.dispatch(clearRegisteredEvents());
+        store.dispatch(clearCreatedEvents());
+        store.dispatch(clearInvites());
         window.location.href = '/';
     }
 }

@@ -18,10 +18,6 @@ const EventSchema = new Schema({
         type: Array,
         default: []
     },
-    usersRegistered: {
-        type: Array,
-        default: []
-    },
     created: {
         type: Date,
         default: Date.now
